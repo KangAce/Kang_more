@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="bookstore">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="day19_1"/>
+    <schema id="4" parent="1" name="day42"/>
+    <schema id="5" parent="1" name="game1"/>
+    <schema id="6" parent="1" name="gjp"/>
+    <schema id="7" parent="1" name="information_schema"/>
+    <schema id="8" parent="1" name="itheima"/>
+    <schema id="9" parent="1" name="j2ee_news"/>
+    <schema id="10" parent="1" name="kang"/>
+    <schema id="11" parent="1" name="kitadmin"/>
+    <schema id="12" parent="1" name="more">
+      <Visible>1</Visible>
+    </schema>
+    <schema id="13" parent="1" name="mysql"/>
+    <schema id="14" parent="1" name="performance_schema"/>
+    <schema id="15" parent="1" name="repay"/>
+    <schema id="16" parent="1" name="spring312"/>
+    <schema id="17" parent="1" name="store01"/>
+    <schema id="18" parent="1" name="struts2"/>
+    <schema id="19" parent="1" name="test1"/>
+    <schema id="20" parent="1" name="test2"/>
+    <schema id="21" parent="1" name="web_test1"/>
+    <schema id="22" parent="1" name="world"/>
+    <schema id="23" parent="1" name="xxz"/>
+    <schema id="24" parent="1" name="yxyz"/>
+    <table id="25" parent="2" name="books"/>
+    <table id="26" parent="12" name="category"/>
+    <table id="27" parent="12" name="orderitem"/>
+    <table id="28" parent="12" name="orders"/>
+    <table id="29" parent="12" name="product"/>
+    <table id="30" parent="12" name="productions"/>
+    <table id="31" parent="12" name="user"/>
+    <column id="32" parent="25" name="id">
+      <Position>1</Position>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="25" name="name">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="25" name="price">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="35" parent="25" name="pnum">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="36" parent="25" name="category">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="37" parent="25" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="38" parent="26" name="cid">
+      <Position>1</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="26" name="cname">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="40" parent="26" name="PRIMARY">
+      <ColNames>cid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="41" parent="27" name="itemid">
+      <Position>1</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="27" name="count">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="43" parent="27" name="subtotal">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="44" parent="27" name="pid">
+      <Position>4</Position>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <column id="45" parent="27" name="oid">
+      <Position>5</Position>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <index id="46" parent="27" name="fk_0001">
+      <ColNames>pid</ColNames>
+    </index>
+    <index id="47" parent="27" name="fk_0002">
+      <ColNames>oid</ColNames>
+    </index>
+    <key id="48" parent="27" name="PRIMARY">
+      <ColNames>itemid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="49" parent="27" name="fk_0001">
+      <ColNames>pid</ColNames>
+      <RefSchemaName>more</RefSchemaName>
+      <RefTableName>product</RefTableName>
+      <RefColNames>pid</RefColNames>
+    </foreign-key>
+    <foreign-key id="50" parent="27" name="fk_0002">
+      <ColNames>oid</ColNames>
+      <RefSchemaName>more</RefSchemaName>
+      <RefTableName>orders</RefTableName>
+      <RefColNames>oid</RefColNames>
+    </foreign-key>
+    <column id="51" parent="28" name="oid">
+      <Position>1</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="28" name="ordertime">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="53" parent="28" name="total">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="54" parent="28" name="state">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="55" parent="28" name="address">
+      <Position>5</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="56" parent="28" name="name">
+      <Position>6</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="57" parent="28" name="telephone">
+      <Position>7</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="58" parent="28" name="uid">
+      <Position>8</Position>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <key id="59" parent="28" name="PRIMARY">
+      <ColNames>oid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="60" parent="29" name="pid">
+      <Position>1</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="29" name="pname">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="62" parent="29" name="market_price">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="63" parent="29" name="shop_price">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="64" parent="29" name="pimage">
+      <Position>5</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="65" parent="29" name="pdate">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="66" parent="29" name="is_hot">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="67" parent="29" name="pdesc">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="68" parent="29" name="pflag">
+      <Position>9</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="69" parent="29" name="cid">
+      <Position>10</Position>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <index id="70" parent="29" name="sfk_0001">
+      <ColNames>cid</ColNames>
+    </index>
+    <key id="71" parent="29" name="PRIMARY">
+      <ColNames>pid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="72" parent="29" name="sfk_0001">
+      <ColNames>cid</ColNames>
+      <RefSchemaName>more</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>cid</RefColNames>
+    </foreign-key>
+    <column id="73" parent="30" name="id">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="74" parent="30" name="productions_name">
+      <Position>2</Position>
+      <Comment>商品名称</Comment>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="30" name="logo">
+      <Position>3</Position>
+      <Comment>商品logo</Comment>
+      <DataType>varchar(150)|0</DataType>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="76" parent="30" name="sm_logo">
+      <Position>4</Position>
+      <Comment>商品缩略图logo</Comment>
+      <DataType>varchar(150)|0</DataType>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="77" parent="30" name="price">
+      <Position>5</Position>
+      <Comment>商品价格</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0.00&apos;</DefaultExpression>
+    </column>
+    <column id="78" parent="30" name="productions_desc">
+      <Position>6</Position>
+      <Comment>商品描述</Comment>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="79" parent="30" name="is_on_sale">
+      <Position>7</Position>
+      <Comment>是否上架：1：上架，0：下架</Comment>
+      <DataType>tinyint(3)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="80" parent="30" name="is_delete">
+      <Position>8</Position>
+      <Comment>是否已经删除，1：已经删除 0：未删除</Comment>
+      <DataType>tinyint(3)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="81" parent="30" name="addtime">
+      <Position>9</Position>
+      <Comment>添加时间</Comment>
+      <DataType>int(10)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="82" parent="30" name="views">
+      <Position>10</Position>
+      <Comment>浏览次数</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="83" parent="30" name="filepath">
+      <Position>11</Position>
+      <Comment>文件存放目录</Comment>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <index id="84" parent="30" name="addtime">
+      <ColNames>addtime</ColNames>
+    </index>
+    <index id="85" parent="30" name="is_delete">
+      <ColNames>is_delete</ColNames>
+    </index>
+    <index id="86" parent="30" name="is_on_sale">
+      <ColNames>is_on_sale</ColNames>
+    </index>
+    <index id="87" parent="30" name="price">
+      <ColNames>price</ColNames>
+    </index>
+    <key id="88" parent="30" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="89" parent="31" name="uid">
+      <Position>1</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="90" parent="31" name="username">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="91" parent="31" name="password">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="92" parent="31" name="name">
+      <Position>4</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="93" parent="31" name="email">
+      <Position>5</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="94" parent="31" name="telephone">
+      <Position>6</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="95" parent="31" name="birthday">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="96" parent="31" name="sex">
+      <Position>8</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="97" parent="31" name="state">
+      <Position>9</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="98" parent="31" name="code">
+      <Position>10</Position>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="99" parent="31" name="PRIMARY">
+      <ColNames>uid</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
