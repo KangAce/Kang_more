@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- bean definitions here -->
+
+
+	<context:component-scan base-package="cn.more"/>
+	<!--导入外部配置，是相应的变量可以直接使用 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!--设置数据源，根据使用的连接池导入不同的数据源类，并且配置四项基本信息 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!--设置工厂，使用Spring提供的类，规定将各类属性放在一个properties类型的集合中，同时再次设置hibernate需要的其他属性， 
+		后边事务管理器和Spring的声明式事务管理都需要注入sessionFactory。 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<!--设置数据库方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!--设置是否显示sql语句 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<!--设置sql的格式化 -->
+				<prop key="hibernate.format_sql">true</prop>
+				<!--设置hibernate的更新方式 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!--抛弃hibernate.cfg.xml 由于这里配置的时候使用的是注解方式，所以需要声明哪些类中使用了注解，放在一个String的集合中 
+			mapping-resource 如果使用xml文件配置则需要设置对应的xml文件的引用，放在一个类的数组中 annotatedClasses -->
+		<property name="annotatedClasses">
+			<list>
+				<value>cn.more.domain.Customer</value>
+			</list>
+		</property>
+	</bean>
+	<!--事务控制管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!--声明 增强功能块 由Spring内置提供 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<!--根据刚才声明的增强功能块，设置aop切点 -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* cn.more.service.impl.*.*(..))" />
+	</aop:config>
+	<!--Spring设置声明式事务管理 底层是由各种template实现由于使用的是hibernate框架所以需要设置hibernate的template 
+		在oem包中 同时需要注入工厂让template可以直接使用工厂创建session和管理事务 用于注入dao层 让dao层可以直接使用 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>
